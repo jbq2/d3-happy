@@ -1,25 +1,40 @@
 import logo from './logo.svg';
 import './App.css';
+import Child1 from './Child1';
+import SampleDataset from './SampleDataset.csv';
+import Child2 from './Child2';
+import { Component } from 'react';
+import * as d3 from 'd3';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {data: []};
+    }
+    
+    componentDidMount() {
+        let self = this;
+        d3
+            .csv(SampleDataset, function(d) {
+                return {
+                    x: d.x,
+                    y: d.y,
+                    category: d.category
+                }
+            })
+            .then(function(csvData) {
+                self.setState({data: csvData});
+            });
+    }
+
+    render() {
+        return (
+            <div>
+                <Child1 data={ this.state.data } />
+                <Child2 data={ this.state.data } />
+            </div>
+        );
+    }
 }
 
 export default App;
