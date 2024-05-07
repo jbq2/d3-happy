@@ -36,7 +36,6 @@ class Child1 extends Component {
             .range([margin.left, svgWidth])
             .padding(0.2);
         
-        const yScaleHeight = svgHeight - margin.top - margin.bottom;
         const yScale = d3.scaleLinear()
             .domain([0, d3.max(formattedData.map(d => d.total))])
             .range([svgHeight, margin.bottom]);

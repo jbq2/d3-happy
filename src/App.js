@@ -31,6 +31,9 @@ class App extends Component {
         return (
             <div>
                 <Child1 data={ this.state.data } />
+                <br></br>
+                <br></br>
+                <br></br>
                 <Child2 data={ this.state.data } />
             </div>
         );
